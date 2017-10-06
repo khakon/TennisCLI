@@ -1,0 +1,9 @@
+d:\users\влад\documents\visual studio 2017\Projects\TennisCLI\TennisCLI\bin\Debug\netcoreapp1.1\TennisCLI.deps.json
+d:\users\влад\documents\visual studio 2017\Projects\TennisCLI\TennisCLI\bin\Debug\netcoreapp1.1\TennisCLI.runtimeconfig.json
+d:\users\влад\documents\visual studio 2017\Projects\TennisCLI\TennisCLI\bin\Debug\netcoreapp1.1\TennisCLI.runtimeconfig.dev.json
+d:\users\влад\documents\visual studio 2017\Projects\TennisCLI\TennisCLI\bin\Debug\netcoreapp1.1\TennisCLI.dll
+d:\users\влад\documents\visual studio 2017\Projects\TennisCLI\TennisCLI\obj\Debug\netcoreapp1.1\TennisCLI.csprojResolveAssemblyReference.cache
+d:\users\влад\documents\visual studio 2017\Projects\TennisCLI\TennisCLI\obj\Debug\netcoreapp1.1\TennisCLI.AssemblyInfo.cs
+d:\users\влад\documents\visual studio 2017\Projects\TennisCLI\TennisCLI\bin\Debug\netcoreapp1.1\TennisCLI.pdb
+d:\users\влад\documents\visual studio 2017\Projects\TennisCLI\TennisCLI\obj\Debug\netcoreapp1.1\TennisCLI.dll
+d:\users\влад\documents\visual studio 2017\Projects\TennisCLI\TennisCLI\obj\Debug\netcoreapp1.1\TennisCLI.pdb
