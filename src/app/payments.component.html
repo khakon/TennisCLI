@@ -1,0 +1,71 @@
+﻿<h3>{{title}}</h3>
+<div class="dx-fieldset">
+  <dx-data-grid id="gridContainer"
+                [dataSource]="pays"
+                (onToolbarPreparing)="onToolbarPreparing($event)">
+    <dxo-filter-row [visible]="true"
+                    [applyFilter]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [visible]="true"
+                      [width]="240"
+                      placeholder="Search..."></dxo-search-panel>
+    <dxi-column caption="Date" dataField="date" dataType="date" format='shortDate'></dxi-column>
+    <dxi-column caption="Trener" dataField="trener"></dxi-column>
+    <dxi-column caption="Player" dataField="player"></dxi-column>
+    <dxi-column caption="Total" dataField="total"></dxi-column>
+    <dxi-column [width]="32" cellTemplate="deleteTemplate"></dxi-column>
+    <div *dxTemplate="let d of 'deleteTemplate'">
+      <a (click)="deleteActionOptions.onClick(d.data)" class="dx-button remove"><span class="dx-icon-remove icon"></span></a>
+    </div>
+    <div *dxTemplate="let d of 'currentMonth'">
+      <div class="informer"><h3>{{monthName}}</h3></div>
+    </div>
+  </dx-data-grid>
+</div>
+<dx-load-panel #loadPanel
+               shadingColor="rgba(0,0,0,0.4)"
+               [(visible)]="loadingVisible"
+               [showIndicator]="true"
+               [showPane]="true"
+               [shading]="true"
+               [closeOnOutsideClick]="true">
+</dx-load-panel>
+<dx-popup class="popup"
+          [width]="300"
+          [height]="400"
+          [showTitle]="true"
+          title="Confirm deleting"
+          [dragEnabled]="false"
+          [closeOnOutsideClick]="true"
+          [(visible)]="popupVisibleDelete">
+  <div *dxTemplate="let data of 'content'">
+    <p>
+      Date:
+      <span>{{pay.date | date:'shortDate'}}</span>
+    </p>
+    <p>
+      Trener:
+      <span>{{pay.trener}}</span>
+    </p>
+    <p>
+      Player:
+      <span>{{pay.player}}</span>
+    </p>
+    <p>
+      Total:
+      <span>{{pay.total}}</span>
+    </p>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-value">
+          <dx-button [text]="cancelDeleteButtonOptions.text" [type]="cancelDeleteButtonOptions.type" (onClick)="cancelDeleteButtonOptions.onClick()"></dx-button>
+        </div>
+        <div class="dx-field-value">
+          <dx-button [text]="deleteButtonOptions.text" [type]="deleteButtonOptions.type" (onClick)="deleteButtonOptions.onClick()"></dx-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dx-popup>
+
+

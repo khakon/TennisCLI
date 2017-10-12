@@ -1,20 +1,51 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+﻿<!--<div class="menu">
+  <a class="dashboard" [routerLink]="['']">Dashboard</a>
+  <a class="customers" [routerLink]="['customers']">Customers</a>
+  <a class="treners" [routerLink]="['treners']">Treners</a>
+  <a class="orders" [routerLink]="['orders']">Orders</a>
+  <a class="payments" [routerLink]="['payments']">Payments</a>
+  <a class="reservations" [routerLink]="['reservations']">Reservations</a>
+  <a class="courts" [routerLink]="['courts']">Courts</a>
+</div>-->
+
+
+<div class="wrapper" style="height: auto; min-height: 100%;">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="index.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>A</b>LT</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Tennis</b>CLUB</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar" style="height: auto;">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+      </div>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu tree" data-widget="tree">
+        <li class="header">NAVIGATION</li>
+        <li><a [routerLink]="['']"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
+        <li><a [routerLink]="['players']"><i class="fa fa-book"></i> <span>Players</span></a></li>
+        <li><a [routerLink]="['treners']"><i class="fa fa-book"></i> <span>Treners</span></a></li>
+        <li><a [routerLink]="['courts']"><i class="fa fa-book"></i> <span>Courts</span></a></li>
+        <li><a [routerLink]="['reservations']"><i class="fa fa-book"></i> <span>Reservations</span></a></li>
+        <li><a [routerLink]="['subscriptions']"><i class="fa fa-book"></i> <span>Subscriptions</span></a></li>
+        <li><a [routerLink]="['payments']"><i class="fa fa-book"></i> <span>Payments</span></a></li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  <div class="content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 

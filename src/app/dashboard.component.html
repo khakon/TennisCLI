@@ -1,0 +1,267 @@
+﻿<section class="content-header">
+  <h1>
+    October 2017
+    <small>Control panel</small>
+  </h1>
+</section>
+<section class="content">
+  <!-- Small boxes (Stat box) -->
+  <div class="row">
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-aqua">
+        <div class="inner">
+          <h3>${{totalOrds | number}}</h3>
+
+          <p>Orders</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+        <a (click)="setGraphOptions('ords')"  class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h3>{{totalSubs | number}}<sup style="font-size: 20px"> hours</sup></h3>
+
+          <p>Subscribes</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-stats-bars"></i>
+        </div>
+        <a (click)="setGraphOptions('subs')" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-yellow">
+        <div class="inner">
+          <h3>{{totalPlays}}</h3>
+
+          <p>Players</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+        <a (click)="setGraphOptions('plays')"  class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-red">
+        <div class="inner">
+          <h3>${{totalPays | number}}</h3>
+
+          <p>Payments</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a (click)="setGraphOptions('pays')"  class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+  </div>
+  <!-- /.row -->
+  <!-- Main row -->
+  <div class="row">
+    <!-- Left col -->
+    <section class="col-lg-8 connectedSortable ui-sortable">
+      <div class="nav-tabs-custom" style="cursor: move;">
+        <ul class="nav nav-tabs pull-right ui-sortable-handle">
+          <li><a (click)="prevCourt()" class="btn btn-info">Prev Court</a></li>
+          <li><a (click)="nextCourt()" class="btn btn-info">Next Court</a></li>
+          <li class="pull-left header"><i class="fa fa-inbox"></i>{{courtName}} </li>
+        </ul>
+        <dx-scheduler [dataSource]="data"
+                      [views]='["day", "workWeek", "month"]'
+                      currentView="workWeek"
+                      [startDayHour]="12"
+                      [endDayHour]="24"
+                      [height]="600"
+                      (onAppointmentClick)="onAppointmentClick($event)"
+                      appointmentTemplate="appointment-template"
+                      appointmentTooltipTemplate="tooltip-template">
+          <dxi-resource
+                        fieldExpr="priceId"
+                        [dataSource]="prices"
+                        [useColorAsDefault]="true">
+          </dxi-resource>
+          <div *dxTemplate="let reserv of 'appointment-template'">
+            <div class='showtime-preview'>
+              <div>{{getTrenerById(reserv.trenerId).name}}</div>
+              <div>{{getPriceById(reserv.priceId).name}}</div>
+              <div>
+                per Price:
+                <strong>{{'$' + reserv.total}}</strong>
+              </div>
+              <div>
+                count of players:
+                <strong>{{reserv.count}}</strong>
+              </div>
+              <div>
+                {{(reserv.startDate | date:'shortTime') + ' - ' + (reserv.endDate | date:'shortTime')}}
+              </div>
+            </div>
+          </div>
+          <div *dxTemplate="let reserv of 'tooltip-template'">
+            <div class='movie-tooltip'>
+              <div class='movie-info'>
+                <div class='movie-title'>
+                  {{getPriceById(reserv.priceId).name + ' (' + '$' + reserv.total + ')'}}
+                </div>
+                <div>
+                  {{'Trener: ' + getTrenerById(reserv.trenerId).name}}
+                </div>
+                <div>
+                  {{(reserv.startDate | date:'shortTime') + ' - ' + (reserv.endDate | date:'shortTime')}}
+                </div>
+                <div>
+                  {{'Players: ' + getCustomers(reserv.id)}}
+                </div>
+              </div><br />
+              <div class="dx-fieldset">
+                <div class="dx-field">
+                  <div class="dx-field-value">
+                    <dx-button [text]="cancelButtonOptions.text" [type]="cancelButtonOptions.type" (onClick)="cancelButtonOptions.onClick()"></dx-button>
+                  </div>
+                  <div class="dx-field-value">
+                    <dx-button [text]="subscribeButtonOptions.text" [type]="subscribeButtonOptions.type" (onClick)="subscribeButtonOptions.onClick()"></dx-button>
+                  </div>
+                  <div class="dx-field-value">
+                    <dx-button [text]="trenerButtonOptions.text" [type]="trenerButtonOptions.type" (onClick)="trenerButtonOptions.onClick()"></dx-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </dx-scheduler>
+      </div>
+
+
+    </section>
+    <!-- /.Left col -->
+    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+    <section class="col-lg-4 connectedSortable ui-sortable">
+      <!-- solid graph -->
+      <div class="box box-solid bg-teal-gradient">
+        <div class="box-header ui-sortable-handle" style="cursor: move;">
+          <i class="fa fa-th"></i>
+
+          <h3 class="box-title">{{graphOptions.title}}</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn bg-teal btn-sm" data-widget="collapse">
+              <i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn bg-teal btn-sm" data-widget="remove">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="box-body border-radius-none">
+          <dx-chart color="white"
+                    [dataSource]="graphOptions.data">
+            <dxi-series valueField="total" name="Total"></dxi-series>
+            <dxo-common-series-settings #seriesSettings
+                                        argumentField="month"
+                                        type="spline">
+            </dxo-common-series-settings>
+            <dxo-margin [bottom]="20"></dxo-margin>
+            <dxo-common-axis-settings>
+              <dxo-grid [visible]="false"></dxo-grid>
+            </dxo-common-axis-settings>
+            <dxo-legend verticalAlignment="top"
+                        horizontalAlignment="right">
+            </dxo-legend>
+            <dxo-export [enabled]="false"></dxo-export>
+            <dxo-tooltip [enabled]="true"></dxo-tooltip>
+          </dx-chart>    
+        </div>
+        <!-- /.box-body -->
+        <!-- /.box-footer -->
+      </div>
+      <!-- /.box -->
+    </section>
+    <!-- right col -->
+  </div>
+  <!-- /.row (main row) -->
+</section>
+<dx-load-panel #loadPanel
+               shadingColor="rgba(0,0,0,0.4)"
+               [(visible)]="loadingVisible"
+               [showIndicator]="true"
+               [showPane]="true"
+               [shading]="true"
+               [closeOnOutsideClick]="true">
+</dx-load-panel>
+<dx-popup class="popup"
+          [width]="600"
+          [height]="500"
+          [showTitle]="true"
+          title="Change coach"
+          [dragEnabled]="false"
+          [closeOnOutsideClick]="true"
+          [(visible)]="popupVisibleTrener">
+  <div *dxTemplate="let data of 'content'">
+    <div id="form-container">
+      <dx-form id="form"
+               [colCount]="1"
+               [formData]="reserv">
+        <dxi-item dataField="start" [editorOptions]="{ disabled: true }" dataType="date" format='shortDateShortTime'></dxi-item>
+        <dxi-item dataField="end" [editorOptions]="{ disabled: true }" dataType="date" format='shortDateShortTime'></dxi-item>
+        <dxi-item dataField="lesson" [editorOptions]="{ disabled: true }"></dxi-item>
+        <dxi-item dataField="court" [editorOptions]="{ disabled: true }"></dxi-item>
+        <dxi-item dataField="trener" editorType="dxSelectBox" [editorOptions]="{ items: treners,valueExpr:'id',displayExpr:'name', value:reserv.trener }"></dxi-item>
+      </dx-form>
+    </div>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-value">
+          <dx-button [text]="cancelSaveTrenerButtonOptions.text" [type]="cancelSaveTrenerButtonOptions.type" (onClick)="cancelSaveTrenerButtonOptions.onClick()"></dx-button>
+        </div>
+        <div class="dx-field-value">
+          <dx-button [text]="saveTrenerButtonOptions.text" [type]="saveTrenerButtonOptions.type" (onClick)="saveTrenerButtonOptions.onClick()"></dx-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dx-popup>
+<dx-popup class="popup"
+          [width]="600"
+          [height]="500"
+          [showTitle]="true"
+          title="Change coach"
+          [dragEnabled]="false"
+          [closeOnOutsideClick]="true"
+          [(visible)]="popupVisiblePlayer">
+  <div *dxTemplate="let data of 'content'">
+    <div id="form-container">
+      <dx-form id="form"
+               [colCount]="1"
+               [formData]="reserv">
+        <dxi-item dataField="start" [editorOptions]="{ disabled: true }" dataType="date" format='shortDateShortTime'></dxi-item>
+        <dxi-item dataField="end" [editorOptions]="{ disabled: true }" dataType="date" format='shortDateShortTime'></dxi-item>
+        <dxi-item dataField="lesson" [editorOptions]="{ disabled: true }"></dxi-item>
+        <dxi-item dataField="court" [editorOptions]="{ disabled: true }"></dxi-item>
+        <dxi-item dataField="player" editorType="dxSelectBox" [editorOptions]="{ items: playersSelect,valueExpr:'id',displayExpr:'name', value:'',searchEnabled: true }"></dxi-item>
+      </dx-form>
+    </div>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-value">
+          <dx-button [text]="cancelSavePlayerButtonOptions.text" [type]="cancelSavePlayerButtonOptions.type" (onClick)="cancelSavePlayerButtonOptions.onClick()"></dx-button>
+        </div>
+        <div class="dx-field-value">
+          <dx-button [text]="savePlayerButtonOptions.text" [type]="savePlayerButtonOptions.type" (onClick)="savePlayerButtonOptions.onClick()"></dx-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dx-popup>

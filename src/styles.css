@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+﻿.content-wrapper {
+  min-height: 100%;
+  background-color: #ecf0f5;
+  z-index: 800;
+}
+.dx-datagrid {
+  background-color: #ecf0f5;
+}
+.dx-toolbar {
+  background-color: #ecf0f5;
+}
+.dx-button.remove {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  color: #fff;
+}
+.dx-button.search {
+  background-color: #337ab7;
+  border-color: #2d6da3;
+  color: #fff;
+}
+.dx-button.edit {
+  background-color: #449d44;
+  border-color: #398439;
+}

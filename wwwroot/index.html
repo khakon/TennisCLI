@@ -1,27 +1,13 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <base href="/">
-    <title>OpenGameList</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Step 1. Load libraries -->
-    <!-- Polyfill(s) for older browsers -->
-    <script src="js/shim.min.js"></script>
-    <script src="js/zone.js"></script>
-    <script src="js/Reflect.js"></script>
-    <script src="js/system.src.js"></script>
-
-    <!-- Step 2. Configure SystemJS -->
-    <script src="systemjs.config.js"></script>
-    <script>
-        System.import('app').catch(function (err) { console.error(err); });
-    </script>
+  <meta charset="utf-8">
+  <title>TennisCLI</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-
-<!-- Step 3. Display the application -->
-<body>
-    <!-- Application PlaceHolder -->
-    <opengamelist>Loading...</opengamelist>
-</body>
+<body class="skin-blue sidebar-mini wysihtml5-supported">
+  <app-root></app-root>
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
 </html>
